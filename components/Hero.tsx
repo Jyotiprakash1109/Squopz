@@ -26,7 +26,7 @@ export default function Hero() {
         {/* Heading */}
         <h1 className="text-6xl md:text-8xl font-bold leading-tight">
           <span className="gradient-text">
-            NeuralForge
+            Squopz
           </span>
         </h1>
 
