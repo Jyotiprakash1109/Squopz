@@ -1,11 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-
 import ProjectCard from './ProjectCard'
 
 const projects = [
-
   {
     title: 'AI Dashboard System',
 
@@ -53,58 +51,25 @@ const projects = [
     demo:
       'https://squopz.com',
   },
-
 ]
 
 export default function ProjectsSection() {
 
   return (
 
-    <section className="
-    relative
-    py-32
-    px-6
-    bg-[#050816]
-    ">
+    <section className="relative py-32 px-6 bg-[#050816]">
 
-      <div className="
-      max-w-7xl
-      mx-auto
-      ">
-
-        {/* Heading */}
+      <div className="max-w-7xl mx-auto">
 
         <motion.div
-
-          initial={{
-            opacity: 0,
-            y: 50,
-          }}
-
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-
-          transition={{
-            duration: 0.8,
-          }}
-
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-
-          className="
-          text-center
-          mb-20
-          "
-
+          className="text-center mb-20"
         >
 
-          <h2 className="
-          text-5xl
-          md:text-6xl
-          font-bold
-          mb-6
-          ">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6">
 
             <span className="gradient-text">
               Featured Projects
@@ -112,29 +77,18 @@ export default function ProjectsSection() {
 
           </h2>
 
-          <p className="
-          text-gray-400
-          text-lg
-          max-w-3xl
-          mx-auto
-          ">
+          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
 
             Real-world AI systems,
-            automation platforms,
             dashboards,
+            automation platforms,
             and intelligent applications.
 
           </p>
 
         </motion.div>
 
-        {/* Projects Grid */}
-
-        <div className="
-        grid
-        md:grid-cols-2
-        gap-10
-        ">
+        <div className="grid md:grid-cols-2 gap-10">
 
           {projects.map((project, index) => (
 
