@@ -6,16 +6,58 @@ import {
     MapPin,
     Phone,
     Mail,
+    Calendar,
   } from 'lucide-react'
   
-  import {
+import {
     FaFacebookF,
     FaTwitter,
     FaInstagram,
     FaLinkedinIn,
   } from 'react-icons/fa'
 
+import React, { useState } from 'react'
+import { collection, addDoc } from 'firebase/firestore'
+import { db } from '@/lib/firebase'
+
 export default function Contact() {
+
+  const [name, setName] = useState('')
+
+  const [email, setEmail] = useState('')
+
+  const [project, setProject] = useState('')
+
+  const submitLead = async () => {
+
+    try {
+
+      await addDoc(
+        collection(db, 'leads'),
+        {
+          name,
+          email,
+          project,
+          createdAt: new Date(),
+          status: 'New Lead',
+        }
+      )
+
+      alert('Inquiry submitted successfully')
+
+      setName('')
+      setEmail('')
+      setProject('')
+
+    } catch (error) {
+
+      console.error(error)
+
+      alert('Submission failed')
+
+    }
+
+  }
 
   return (
 
@@ -25,241 +67,104 @@ export default function Contact() {
     >
 
       {/* Background Glow */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[140px] rounded-full" />
 
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-500/10 blur-[140px] rounded-full" />
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[140px]" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-500/10 blur-[140px]" />
 
-        {/* TOP CONTACT CARDS */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
-        >
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start relative z-10">
 
-          {/* Office */}
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-10 text-center shadow-2xl hover:-translate-y-2 transition-all duration-300">
+        {/* LEFT SIDE */}
 
-            <div className="flex justify-center mb-6">
+        <div>
 
-              <div className="p-5 rounded-full bg-cyan-400/10">
+          <p className="text-cyan-400 uppercase tracking-[0.3em] mb-5">
+            Contact Us
+          </p>
 
-                <MapPin className="text-cyan-400" size={42} />
+          <h2 className="text-5xl font-bold text-white leading-tight mb-8">
+            Let’s Build
+            <br />
+            Something Amazing
+          </h2>
+
+          <p className="text-gray-400 text-lg leading-relaxed mb-12">
+            We help businesses automate workflows,
+            build AI systems, dashboards, and intelligent
+            digital products.
+          </p>
+
+          {/* Contact Cards */}
+
+          <div className="space-y-6">
+
+            {/* Email */}
+
+            <div className="flex items-center gap-5 bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl">
+
+              <div className="w-14 h-14 rounded-2xl bg-cyan-400/20 flex items-center justify-center">
+
+                <Mail className="text-cyan-400" />
+
+              </div>
+
+              <div>
+
+                <p className="text-gray-400 text-sm mb-1">
+                  Email
+                </p>
+
+                <p className="text-white text-lg">
+                  hello@squopz.com
+                </p>
 
               </div>
 
             </div>
 
-            <h3 className="text-2xl font-bold text-white mb-4">
-              OUR OFFICE
-            </h3>
+            {/* Phone */}
 
-            <p className="text-gray-400 leading-relaxed">
-              Address Coming Soon
-            </p>
+            <div className="flex items-center gap-5 bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl">
 
-          </div>
+              <div className="w-14 h-14 rounded-2xl bg-purple-400/20 flex items-center justify-center">
 
-          {/* Phone */}
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-10 text-center shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                <Phone className="text-purple-400" />
 
-            <div className="flex justify-center mb-6">
+              </div>
 
-              <div className="p-5 rounded-full bg-cyan-400/10">
+              <div>
 
-                <Phone className="text-cyan-400" size={42} />
+                <p className="text-gray-400 text-sm mb-1">
+                  Phone
+                </p>
+
+                <p className="text-white text-lg">
+                  +91 8596063058
+                </p>
 
               </div>
 
             </div>
 
-            <h3 className="text-2xl font-bold text-white mb-4">
-              PHONE NUMBER
-            </h3>
+            {/* Schedule */}
 
-            <p className="text-gray-400 leading-relaxed">
-              +91 8596063058
-            </p>
+            <div className="flex items-center gap-5 bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl">
 
-          </div>
+              <div className="w-14 h-14 rounded-2xl bg-pink-400/20 flex items-center justify-center">
 
-          {/* Email */}
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-10 text-center shadow-2xl hover:-translate-y-2 transition-all duration-300">
-
-            <div className="flex justify-center mb-6">
-
-              <div className="p-5 rounded-full bg-cyan-400/10">
-
-                <Mail className="text-cyan-400" size={42} />
+                <Calendar className="text-pink-400" />
 
               </div>
 
-            </div>
+              <div>
 
-            <h3 className="text-2xl font-bold text-white mb-4">
-              EMAIL
-            </h3>
+                <p className="text-gray-400 text-sm mb-1">
+                  Schedule Meeting
+                </p>
 
-            <p className="text-gray-400 leading-relaxed">
-              hello@squopz.com
-            </p>
-
-          </div>
-
-        </motion.div>
-
-        {/* MAIN CONTACT BOX */}
-        <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="rounded-[40px] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_0_60px_rgba(0,255,255,0.08)]"
-        >
-
-          <div className="grid grid-cols-1 lg:grid-cols-2">
-
-            {/* LEFT SIDE FORM */}
-            <div className="p-12 md:p-16">
-
-              <form className="space-y-10">
-
-                {/* Email */}
-                <div>
-
-                  <label className="block text-white text-sm uppercase tracking-widest mb-4">
-
-                    Email
-
-                  </label>
-
-                  <input
-                    type="email"
-                    placeholder="Enter a valid email address"
-                    className="w-full bg-transparent border-b border-white/30 py-4 text-white placeholder-gray-500 outline-none focus:border-cyan-400 transition-all duration-300"
-                  />
-
-                </div>
-
-                {/* Name */}
-                <div>
-
-                  <label className="block text-white text-sm uppercase tracking-widest mb-4">
-
-                    Name
-
-                  </label>
-
-                  <input
-                    type="text"
-                    placeholder="Enter your name"
-                    className="w-full bg-transparent border-b border-white/30 py-4 text-white placeholder-gray-500 outline-none focus:border-cyan-400 transition-all duration-300"
-                  />
-
-                </div>
-
-                {/* Message */}
-                <div>
-
-                  <label className="block text-white text-sm uppercase tracking-widest mb-4">
-
-                    Message
-
-                  </label>
-
-                  <textarea
-                    rows={5}
-                    placeholder="Enter your message"
-                    className="w-full bg-transparent border-b border-white/30 py-4 text-white placeholder-gray-500 outline-none resize-none focus:border-cyan-400 transition-all duration-300"
-                  />
-
-                </div>
-
-                {/* Submit */}
-                <motion.button
-                  whileHover={{
-                    scale: 1.03,
-                  }}
-                  whileTap={{
-                    scale: 0.97,
-                  }}
-                  className="w-full py-5 rounded-full bg-cyan-400 text-black font-bold tracking-[4px] hover:bg-cyan-300 transition-all duration-300 mt-8"
-                >
-
-                  SUBMIT
-
-                </motion.button>
-
-              </form>
-
-            </div>
-
-            {/* RIGHT SIDE CONTENT */}
-            <div className="p-12 md:p-16 flex flex-col justify-center border-t lg:border-t-0 lg:border-l border-white/10">
-
-              <h2 className="text-5xl md:text-6xl font-bold mb-8 leading-tight">
-
-                <span className="gradient-text">
-                  Get in touch
-                </span>
-
-              </h2>
-
-              <p className="text-gray-300 text-lg leading-relaxed mb-8">
-
-                We build futuristic AI-powered systems for businesses,
-                automation workflows, analytics platforms, and scalable
-                intelligent solutions.
-
-              </p>
-
-              <p className="text-gray-400 leading-relaxed mb-12">
-
-                Whether you're looking for AI automation, custom dashboards,
-                internal tools, or advanced business intelligence systems —
-                Squopz can help you transform operations with modern AI.
-
-              </p>
-
-              {/* SOCIAL ICONS */}
-              <div className="flex gap-6">
-
-                <a
-                  href="#"
-                  className="p-4 rounded-full bg-white/5 border border-white/10 hover:bg-cyan-400 hover:text-black transition-all duration-300"
-                >
-
-                  <FaFacebookF size={22} />
-
-                </a>
-
-                <a
-                  href="#"
-                  className="p-4 rounded-full bg-white/5 border border-white/10 hover:bg-cyan-400 hover:text-black transition-all duration-300"
-                >
-
-                  <FaTwitter size={22} />
-
-                </a>
-
-                <a
-                  href="#"
-                  className="p-4 rounded-full bg-white/5 border border-white/10 hover:bg-cyan-400 hover:text-black transition-all duration-300"
-                >
-
-                  <FaInstagram size={22} />
-
-                </a>
-
-                <a
-                  href="#"
-                  className="p-4 rounded-full bg-white/5 border border-white/10 hover:bg-cyan-400 hover:text-black transition-all duration-300"
-                >
-
-                  <FaLinkedinIn size={22} />
-
-                </a>
+                <p className="text-white text-lg">
+                  Calendly Integration Soon
+                </p>
 
               </div>
 
@@ -267,10 +172,112 @@ export default function Contact() {
 
           </div>
 
-        </motion.div>
+          {/* Social Icons */}
+
+          <div className="flex gap-5 mt-12">
+
+            <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-cyan-400/20 transition cursor-pointer">
+
+              <FaFacebookF className="text-white" />
+
+            </div>
+
+            <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-purple-400/20 transition cursor-pointer">
+
+              <FaInstagram className="text-white" />
+
+            </div>
+
+            <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-blue-400/20 transition cursor-pointer">
+
+              <FaLinkedinIn className="text-white" />
+
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* RIGHT SIDE FORM */}
+
+        <div className="bg-white/5 border border-white/10 backdrop-blur-2xl rounded-[40px] p-10">
+
+          <h3 className="text-3xl font-bold text-white mb-10">
+            Send Inquiry
+          </h3>
+
+          <div className="space-y-8">
+
+            {/* Name */}
+
+            <div>
+
+              <label className="block text-gray-300 mb-3">
+                Full Name
+              </label>
+
+              <input
+                type="text"
+                placeholder="Enter your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white outline-none"
+              />
+
+            </div>
+
+            {/* Email */}
+
+            <div>
+
+              <label className="block text-gray-300 mb-3">
+                Email Address
+              </label>
+
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white outline-none"
+              />
+
+            </div>
+
+            {/* Project */}
+
+            <div>
+
+              <label className="block text-gray-300 mb-3">
+                Project Details
+              </label>
+
+              <textarea
+                rows={6}
+                placeholder="Tell us about your project..."
+                value={project}
+                onChange={(e) => setProject(e.target.value)}
+                className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white outline-none resize-none"
+              />
+
+            </div>
+
+            {/* Submit Button */}
+
+            <button
+              onClick={submitLead}
+              className="w-full py-4 rounded-2xl bg-cyan-400 text-black font-semibold hover:scale-105 transition duration-300"
+            >
+              Submit Inquiry
+            </button>
+
+          </div>
+
+        </div>
 
       </div>
 
     </section>
+
   )
 }

@@ -5,6 +5,7 @@ import About from '@/components/About'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import Chatbot from '@/components/Chatbot'
+import ProjectsSection from '@/components/projects/ProjectsSection'
 
 export default function Home() {
 
