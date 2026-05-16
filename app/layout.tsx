@@ -1,33 +1,30 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next'
+import './globals.css'
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import SmoothScroll from '@/components/SmoothScroll'
 
 export const metadata: Metadata = {
-  title: "Squopz",
-  description: " Squopz builds AI automation, analytics dashboards, and intelligent business solutions for modern companies.",
-};
+  title: 'Squopz',
+  description: 'AI Automation & Analytics Platform',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
+
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en">
+
+      <body>
+
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
+
+      </body>
+
     </html>
-  );
+  )
 }
