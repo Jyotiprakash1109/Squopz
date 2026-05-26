@@ -43,16 +43,7 @@ export default function Hero() {
         </p>
 
         {/* CTA Buttons */}
-        <motion.div
-          animate={{
-            y: [0, -10, 0],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-          }}
-          className="flex flex-col sm:flex-row justify-center gap-6"
-        >
+        <div className="flex flex-col sm:flex-row justify-center gap-6">
 
           {/* Primary Button */}
           <button className="px-8 py-4 rounded-full bg-cyan-400 text-black font-semibold text-lg hover:scale-105 transition duration-300 shadow-lg shadow-cyan-500/30">
@@ -68,7 +59,7 @@ export default function Hero() {
 
           </button>
 
-        </motion.div>
+        </div>
 
       </motion.div>
 

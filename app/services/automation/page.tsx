@@ -29,7 +29,7 @@ export default function AutomationPage() {
           <div className="grid md:grid-cols-2 gap-10">
   
             <img
-              src="projects/automation 1.png"
+              src="/projects/automation 1.png"
               alt="Automation"
               className="
               rounded-3xl
